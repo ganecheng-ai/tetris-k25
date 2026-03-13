@@ -127,6 +127,11 @@ tetris-k25/
 ### v0.6.0 - CI/CD
 GitHub Actions 自动构建 ✓
 
+### v0.1.7 - PyInstaller Spec 文件修复
+- 修复 spec 文件中的 `__file__` 未定义错误
+- 使用 `SPECPATH` 替代 `__file__` 获取规范文件路径
+- 自验证测试通过
+
 ### v0.1.6 - PyInstaller 打包修复
 - 修复 Issue #2: 打包后可执行文件启动报错
 - 添加 PyInstaller spec 文件配置
@@ -146,6 +151,11 @@ GitHub Actions 自动构建 ✓
 完整功能，多平台发布
 
 ## 更新日志
+
+### 2025-03-13 - v0.1.7
+- 修复 PyInstaller spec 文件中的 `__file__` 未定义错误
+- 使用 `SPECPATH` 替代 `__file__` 获取规范文件路径
+- 自验证测试通过
 
 ### 2025-03-13 - v0.1.6
 - 修复 Issue #2: v0.1.5 启动报错 ModuleNotFoundError

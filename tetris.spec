@@ -1,7 +1,8 @@
 # -*- mode: python ; coding: utf-8 -*-
 import os
 
-src_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src')
+spec_dir = os.path.dirname(os.path.abspath(SPECPATH))
+src_path = os.path.join(spec_dir, 'src')
 
 a = Analysis(
     ['src/main.py'],
