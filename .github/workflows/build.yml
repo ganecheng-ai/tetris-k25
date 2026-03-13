@@ -1,0 +1,147 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [main, master]
+    tags:
+      - "v*"
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        include:
+          - os: windows-latest
+            artifact_name: tetris-windows-x64
+            ext: .exe
+          - os: ubuntu-latest
+            artifact_name: tetris-linux-x64
+            ext: .tar.gz
+          - os: macos-latest
+            artifact_name: tetris-macos-x64
+            ext: .dmg
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build with PyInstaller (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          pyinstaller --onefile --windowed --name tetris src/main.py
+
+      - name: Build with PyInstaller (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          pyinstaller --onefile --windowed --name tetris src/main.py
+          cd dist
+          tar -czf tetris-linux-x64.tar.gz tetris
+
+      - name: Build with PyInstaller (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          pyinstaller --onefile --windowed --name tetris src/main.py
+
+      - name: Upload artifacts (Windows)
+        if: matrix.os == 'windows-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: dist/tetris.exe
+
+      - name: Upload artifacts (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: dist/tetris-linux-x64.tar.gz
+
+      - name: Upload artifacts (macOS)
+        if: matrix.os == 'macos-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: dist/tetris
+
+  generate-checksums:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Generate checksums
+        run: |
+          cd artifacts
+          sha256sum */* > checksums.txt
+          cat checksums.txt
+
+      - name: Upload checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: checksums
+          path: artifacts/checksums.txt
+
+  release:
+    needs: [build, generate-checksums]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Generate release notes
+        run: |
+          echo "## 俄罗斯方块 ${{ steps.get_version.outputs.VERSION }}" > RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "### 系统要求" >> RELEASE_NOTES.md
+          echo "- Windows 10/11 (64位)" >> RELEASE_NOTES.md
+          echo "- Ubuntu 20.04+ / Debian 11+ (64位)" >> RELEASE_NOTES.md
+          echo "- macOS 11+ (Intel/Apple Silicon)" >> RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "### 安装说明" >> RELEASE_NOTES.md
+          echo "- **Windows**: 下载 `.exe` 文件直接运行" >> RELEASE_NOTES.md
+          echo "- **Linux**: 下载 `.tar.gz` 文件，解压后运行 `./tetris`" >> RELEASE_NOTES.md
+          echo "- **macOS**: 下载后直接运行 `./tetris`" >> RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "### 文件校验" >> RELEASE_NOTES.md
+          echo "请使用 `checksums.txt` 验证下载文件的完整性" >> RELEASE_NOTES.md
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: RELEASE_NOTES.md
+          files: |
+            artifacts/tetris-windows-x64/tetris.exe
+            artifacts/tetris-linux-x64/tetris-linux-x64.tar.gz
+            artifacts/tetris-macos-x64/tetris
+            artifacts/checksums/checksums.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
