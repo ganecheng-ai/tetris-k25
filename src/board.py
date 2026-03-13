@@ -2,8 +2,8 @@
 
 from typing import List, Tuple, Optional
 
-from .config import GRID_WIDTH, GRID_HEIGHT
-from .tetromino import Tetromino
+from config import GRID_WIDTH, GRID_HEIGHT
+from tetromino import Tetromino
 
 
 class Board:

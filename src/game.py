@@ -4,13 +4,13 @@ import time
 from enum import Enum, auto
 from typing import Optional, Callable
 
-from .config import (
+from config import (
     INITIAL_FALL_SPEED, MIN_FALL_SPEED, SPEED_INCREMENT,
     SCORE_TABLE, GRID_WIDTH, GRID_HEIGHT
 )
-from .tetromino import Tetromino, TetrominoQueue
-from .board import Board
-from .logger import get_logger
+from tetromino import Tetromino, TetrominoQueue
+from board import Board
+from logger import get_logger
 
 logger = get_logger('game')
 

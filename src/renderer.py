@@ -4,14 +4,14 @@ import os
 import pygame
 from typing import Optional, Tuple, List
 
-from .config import (
+from config import (
     WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE,
     GRID_WIDTH, GRID_HEIGHT, CELL_SIZE,
     BOARD_OFFSET_X, BOARD_OFFSET_Y,
     COLORS, FONT_SIZE_SMALL, FONT_SIZE_NORMAL, FONT_SIZE_LARGE, FONT_SIZE_TITLE
 )
-from .logger import get_logger
-from .game import GameState
+from logger import get_logger
+from game import GameState
 
 logger = get_logger('renderer')
 

@@ -4,7 +4,7 @@ import random
 import copy
 from typing import List, Tuple, Optional
 
-from .config import TETROMINO_COLORS
+from config import TETROMINO_COLORS
 
 
 # 7种经典方块的形状定义（使用4x4矩阵）

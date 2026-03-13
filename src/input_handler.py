@@ -3,7 +3,7 @@
 import pygame
 from typing import Callable, Optional, Dict
 
-from .logger import get_logger
+from logger import get_logger
 
 logger = get_logger('input')
 
