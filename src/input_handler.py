@@ -112,8 +112,8 @@ class InputHandler:
                     self.das_timer -= self.key_repeat_interval
                     interval_triggered = True
 
-                if (interval_triggered and
-                        self.last_direction_key in self.key_bindings):
+                if (interval_triggered
+                        and self.last_direction_key in self.key_bindings):
                     self.key_bindings[self.last_direction_key]['callback']()
 
         # 处理其他连续按键
