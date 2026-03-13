@@ -213,7 +213,7 @@ class TetrominoQueue:
         """补充队列"""
         while len(self.queue) < self.preview_count + 1:
             # 生成7-bag：确保每7个方块包含所有类型
-            bag = [Tetromino(t) for t in SHAPES.keys()]
+            bag = [Tetromino(t) for t in SHAPES]
             random.shuffle(bag)
             self.queue.extend(bag)
 

@@ -247,10 +247,9 @@ class Game:
             self.current_tetromino = new_tetromino
             self._update_ghost()
             return True
-        else:
-            # 无法下落，锁定方块
-            self._lock_tetromino()
-            return False
+        # 无法下落，锁定方块
+        self._lock_tetromino()
+        return False
 
     def hard_drop(self) -> int:
         """
