@@ -91,6 +91,7 @@ tetris-k25/
 
 ### 版本历史
 
+- **v0.2.0** - 代码格式优化，修复所有 flake8 E501 警告
 - **v0.1.9** - 代码质量优化，修复 pylint 警告
 - **v0.1.8** - 更新 GitHub Actions action-gh-release 到 v2，同步版本号
 - **v0.1.7** - 修复 PyInstaller spec 文件路径问题

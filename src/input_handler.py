@@ -107,11 +107,13 @@ class InputHandler:
             if self.das_timer >= self.das_delay:
                 # DAS激活后，按间隔重复触发
                 interval_triggered = False
-                while self.das_timer >= self.das_delay + self.key_repeat_interval:
+                trigger_threshold = self.das_delay + self.key_repeat_interval
+                while self.das_timer >= trigger_threshold:
                     self.das_timer -= self.key_repeat_interval
                     interval_triggered = True
 
-                if interval_triggered and self.last_direction_key in self.key_bindings:
+                if (interval_triggered and
+                        self.last_direction_key in self.key_bindings):
                     self.key_bindings[self.last_direction_key]['callback']()
 
         # 处理其他连续按键

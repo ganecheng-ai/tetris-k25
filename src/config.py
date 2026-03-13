@@ -53,7 +53,9 @@ SCORE_TABLE = {
 }
 
 # 日志配置
-LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'logs')
+LOG_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'logs'
+)
 LOG_FILE = os.path.join(LOG_DIR, 'tetris.log')
 LOG_LEVEL = 'INFO'
 LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'

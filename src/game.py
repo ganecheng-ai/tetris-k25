@@ -123,7 +123,9 @@ class Game:
     def _update_ghost(self):
         """更新影子位置"""
         if self.current_tetromino:
-            self.ghost_tetromino = self.board.get_ghost_position(self.current_tetromino)
+            self.ghost_tetromino = self.board.get_ghost_position(
+                self.current_tetromino
+            )
 
     def _lock_tetromino(self):
         """锁定当前方块"""
@@ -164,7 +166,10 @@ class Game:
             if self.on_level_up:
                 self.on_level_up(self.level)
 
-        logger.info(f"消除 {lines_cleared} 行，当前分数: {self.score}，连击: {self.combo}")
+        logger.info(
+            f"消除 {lines_cleared} 行，"
+            f"当前分数: {self.score}，连击: {self.combo}"
+        )
 
         # 回调
         if self.on_line_clear:

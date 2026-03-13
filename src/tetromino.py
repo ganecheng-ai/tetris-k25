@@ -192,7 +192,11 @@ class Tetromino:
         return (min(xs), min(ys), max(xs), max(ys))
 
     def __repr__(self) -> str:
-        return f"Tetromino({self.shape_type}, rotation={self.rotation}, pos=({self.x}, {self.y}))"
+        return (
+            f"Tetromino({self.shape_type}, "
+            f"rotation={self.rotation}, "
+            f"pos=({self.x}, {self.y}))"
+        )
 
 
 class TetrominoQueue:
