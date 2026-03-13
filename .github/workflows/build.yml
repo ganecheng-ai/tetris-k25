@@ -62,6 +62,33 @@ jobs:
         run: |
           pyinstaller --onefile --windowed --name tetris src/main.py
 
+      - name: Create DMG (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          # 安装 create-dmg
+          brew install create-dmg || true
+          # 创建 DMG
+          mkdir -p dist/dmg
+          cp dist/tetris dist/dmg/
+          create-dmg \
+            --volname "Tetris" \
+            --window-pos 200 120 \
+            --window-size 600 400 \
+            --icon-size 100 \
+            --app-drop-link 450 185 \
+            "dist/tetris-macos-x64.dmg" \
+            "dist/dmg/" || cp dist/tetris dist/tetris-macos-x64
+
+      - name: Prepare macOS artifact
+        if: matrix.os == 'macos-latest'
+        run: |
+          # 如果 DMG 生成成功则使用它，否则使用原始文件
+          if [ -f "dist/tetris-macos-x64.dmg" ]; then
+            echo "DMG created successfully"
+          else
+            cp dist/tetris dist/tetris-macos-x64
+          fi
+
       - name: Upload artifacts (Windows)
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
@@ -81,7 +108,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact_name }}
-          path: dist/tetris
+          path: |
+            dist/tetris-macos-x64.dmg
+            dist/tetris
 
   generate-checksums:
     needs: build
@@ -134,7 +163,7 @@ jobs:
           echo "### 安装说明" >> RELEASE_NOTES.md
           echo "- **Windows**: 下载 `.exe` 文件直接运行" >> RELEASE_NOTES.md
           echo "- **Linux**: 下载 `.tar.gz` 文件，解压后运行 `./tetris`" >> RELEASE_NOTES.md
-          echo "- **macOS**: 下载后直接运行 `./tetris`" >> RELEASE_NOTES.md
+          echo "- **macOS**: 下载 `.dmg` 文件，打开后将应用拖到应用程序文件夹" >> RELEASE_NOTES.md
           echo "" >> RELEASE_NOTES.md
           echo "### 文件校验" >> RELEASE_NOTES.md
           echo "请使用 `checksums.txt` 验证下载文件的完整性" >> RELEASE_NOTES.md
@@ -146,6 +175,7 @@ jobs:
           files: |
             artifacts/tetris-windows-x64/tetris.exe
             artifacts/tetris-linux-x64/tetris-linux-x64.tar.gz
+            artifacts/tetris-macos-x64/tetris-macos-x64.dmg
             artifacts/tetris-macos-x64/tetris
             artifacts/checksums/checksums.txt
         env:

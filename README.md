@@ -55,6 +55,12 @@ python main.py
 
 从 [Releases](https://github.com/ganecheng-ai/tetris-k25/releases) 页面下载对应平台的可执行文件。
 
+| 平台 | 文件格式 | 安装说明 |
+|------|----------|----------|
+| Windows | `.exe` | 下载后直接运行 |
+| Linux | `.tar.gz` | 解压后运行 `./tetris` |
+| macOS | `.dmg` | 打开后将应用拖到应用程序文件夹 |
+
 ## 项目结构
 
 ```
