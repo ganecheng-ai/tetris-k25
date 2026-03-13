@@ -3,8 +3,19 @@
 import sys
 import os
 
-# 添加src到路径
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# 添加src到路径（处理正常 Python 运行和 PyInstaller 打包两种情况）
+if getattr(sys, 'frozen', False):
+    # PyInstaller 打包后的环境
+    # sys.executable 是打包后的可执行文件路径
+    # 在 PyInstaller 中，sys._MEIPASS 指向解压后的临时目录
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(sys.executable))
+    src_path = os.path.join(base_path, 'src')
+    if os.path.exists(src_path):
+        sys.path.insert(0, base_path)
+        sys.path.insert(0, src_path)
+else:
+    # 正常 Python 环境
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import pygame  # noqa: E402
 
