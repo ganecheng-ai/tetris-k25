@@ -1,7 +1,7 @@
 """输入处理模块"""
 
 import pygame
-from typing import Callable, Optional, Dict
+from typing import Callable, Dict
 
 from logger import get_logger
 

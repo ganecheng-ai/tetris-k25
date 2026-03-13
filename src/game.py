@@ -6,7 +6,7 @@ from typing import Optional, Callable
 
 from config import (
     INITIAL_FALL_SPEED, MIN_FALL_SPEED, SPEED_INCREMENT,
-    SCORE_TABLE, GRID_WIDTH, GRID_HEIGHT
+    SCORE_TABLE, GRID_WIDTH
 )
 from tetromino import Tetromino, TetrominoQueue
 from board import Board

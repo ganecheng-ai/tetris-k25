@@ -1,8 +1,7 @@
 """渲染系统模块"""
 
-import os
 import pygame
-from typing import Optional, Tuple, List
+from typing import Tuple
 
 from config import (
     WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE,
@@ -59,7 +58,7 @@ class Renderer:
                     # 测试是否支持中文
                     if font.render('测试', True, (255, 255, 255)).get_width() > 0:
                         break
-                except:
+                except Exception:
                     continue
 
             if font is None:
@@ -270,9 +269,9 @@ class Renderer:
 
         # 暂停文字
         self.draw_text('游戏暂停', WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 - 30,
-                      'title', COLORS['text_highlight'], center=True)
+                       'title', COLORS['text_highlight'], center=True)
         self.draw_text('按 P 继续', WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 + 30,
-                      'normal', COLORS['text'], center=True)
+                       'normal', COLORS['text'], center=True)
 
     def draw_game_over_overlay(self, game):
         """绘制游戏结束遮罩"""
@@ -284,13 +283,13 @@ class Renderer:
 
         # 游戏结束文字
         self.draw_text('游戏结束', WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 - 60,
-                      'title', (255, 80, 80), center=True)
+                       'title', (255, 80, 80), center=True)
         self.draw_text(f'最终分数: {game.score}', WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2,
-                      'large', COLORS['text'], center=True)
+                       'large', COLORS['text'], center=True)
         self.draw_text('按 R 重新开始', WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 + 50,
-                      'normal', COLORS['text_highlight'], center=True)
+                       'normal', COLORS['text_highlight'], center=True)
         self.draw_text('按 ESC 退出', WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 + 80,
-                      'normal', COLORS['text'], center=True)
+                       'normal', COLORS['text'], center=True)
 
     def draw_start_screen(self):
         """绘制开始界面"""
@@ -298,15 +297,15 @@ class Renderer:
 
         # 标题
         self.draw_text('俄罗斯方块', WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 - 100,
-                      'title', COLORS['text_highlight'], center=True)
+                       'title', COLORS['text_highlight'], center=True)
 
         # 副标题
         self.draw_text('TETRIS', WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 - 40,
-                      'large', COLORS['text'], center=True)
+                       'large', COLORS['text'], center=True)
 
         # 开始提示
         self.draw_text('按任意键开始游戏', WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 + 50,
-                      'normal', COLORS['text_highlight'], center=True)
+                       'normal', COLORS['text_highlight'], center=True)
 
         self.draw_controls()
 

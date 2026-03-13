@@ -3,7 +3,6 @@
 import logging
 import logging.handlers
 import sys
-from pathlib import Path
 
 from config import LOG_FILE, LOG_LEVEL, LOG_FORMAT, LOG_MAX_BYTES, LOG_BACKUP_COUNT
 

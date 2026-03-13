@@ -11,7 +11,7 @@ import pygame
 from game import Game, GameState
 from renderer import Renderer
 from input_handler import InputHandler
-from logger import setup_logger, get_logger
+from logger import setup_logger
 from config import LOG_FILE
 
 
