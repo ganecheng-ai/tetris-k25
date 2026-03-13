@@ -185,7 +185,13 @@ class InputHandler:
             self.bind_key(key, start_game)
         for key in range(pygame.K_0, pygame.K_9 + 1):
             self.bind_key(key, start_game)
+        # 绑定方向键
+        self.bind_key(pygame.K_LEFT, start_game)
+        self.bind_key(pygame.K_RIGHT, start_game)
+        self.bind_key(pygame.K_UP, start_game)
+        self.bind_key(pygame.K_DOWN, start_game)
         self.bind_key(pygame.K_SPACE, start_game)
         self.bind_key(pygame.K_RETURN, start_game)
+        self.bind_key(pygame.K_KP_ENTER, start_game)
 
         logger.info("菜单按键绑定已设置")
