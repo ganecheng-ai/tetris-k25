@@ -127,6 +127,11 @@ tetris-k25/
 ### v0.6.0 - CI/CD
 GitHub Actions 自动构建 ✓
 
+### v0.1.9 - 代码质量优化
+- 修复 pylint 警告，移除不必要的 else 分支
+- 优化字典迭代方式
+- 代码自验证测试通过
+
 ### v0.1.8 - GitHub Actions Action 版本更新
 - 更新 action-gh-release 从 v1 到 v2
 - 同步 __init__.py 版本号与实际发布版本
@@ -156,6 +161,12 @@ GitHub Actions 自动构建 ✓
 完整功能，多平台发布
 
 ## 更新日志
+
+### 2025-03-13 - v0.1.9
+- 代码质量优化，修复 pylint 警告
+- 移除不必要的 else 分支，简化代码逻辑
+- 优化字典迭代方式
+- 自验证测试通过
 
 ### 2025-03-13 - v0.1.8
 - 更新 GitHub Actions action-gh-release 从 v1 到 v2
