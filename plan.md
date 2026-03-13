@@ -49,6 +49,17 @@
 
 ## Issue 修复记录
 
+### Issue #2 - v0.1.5启动报错 (ModuleNotFoundError)
+**状态**: 已修复并关闭
+**修复版本**: v0.1.6
+**修复时间**: 2025-03-13
+**问题描述**: v0.1.5 版本打包后的可执行文件启动时报错 `ModuleNotFoundError: No module named 'game'`
+**修复内容**:
+- 添加 PyInstaller spec 文件，配置正确的路径和隐藏导入
+- 优化 main.py 路径处理，支持正常 Python 运行和 PyInstaller 打包两种模式
+- 使用 `sys._MEIPASS` 检测打包环境并正确设置路径
+**相关提交**: f9951ad
+
 ### Issue #1 - v0.1.0启动报错 (ModuleNotFoundError)
 **状态**: 已修复并关闭
 **修复版本**: v0.1.1
@@ -116,6 +127,12 @@ tetris-k25/
 ### v0.6.0 - CI/CD
 GitHub Actions 自动构建 ✓
 
+### v0.1.6 - PyInstaller 打包修复
+- 修复 Issue #2: 打包后可执行文件启动报错
+- 添加 PyInstaller spec 文件配置
+- 优化路径处理逻辑
+- 自验证测试通过
+
 ### v0.1.5 - GitHub Actions 优化
 - 修复 Node.js 20 废弃警告，启用 Node.js 24
 - 自验证测试通过
@@ -129,6 +146,13 @@ GitHub Actions 自动构建 ✓
 完整功能，多平台发布
 
 ## 更新日志
+
+### 2025-03-13 - v0.1.6
+- 修复 Issue #2: v0.1.5 启动报错 ModuleNotFoundError
+- 添加 PyInstaller spec 文件，配置正确的路径和隐藏导入
+- 优化 main.py 路径处理，支持正常 Python 运行和 PyInstaller 打包两种模式
+- 使用 `sys._MEIPASS` 检测打包环境并正确设置路径
+- 自验证测试通过
 
 ### 2025-03-13 - v0.1.5
 - 修复 GitHub Actions Node.js 20 废弃警告
