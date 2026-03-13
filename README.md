@@ -91,6 +91,7 @@ tetris-k25/
 
 ### 版本历史
 
+- **v0.1.8** - 更新 GitHub Actions action-gh-release 到 v2，同步版本号
 - **v0.1.7** - 修复 PyInstaller spec 文件路径问题
 - **v0.1.6** - 修复 PyInstaller 打包后的模块导入问题
 - **v0.1.5** - 修复 GitHub Actions Node.js 20 废弃警告

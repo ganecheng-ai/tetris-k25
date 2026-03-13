@@ -173,7 +173,7 @@ jobs:
           echo "请使用 `checksums.txt` 验证下载文件的完整性" >> RELEASE_NOTES.md
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           body_path: RELEASE_NOTES.md
           files: |
