@@ -116,6 +116,10 @@ tetris-k25/
 ### v0.6.0 - CI/CD
 GitHub Actions 自动构建 ✓
 
+### v0.1.5 - GitHub Actions 优化
+- 修复 Node.js 20 废弃警告，启用 Node.js 24
+- 自验证测试通过
+
 ### v0.1.4 - 代码质量优化
 - 修复 flake8 E402 警告
 - 完善代码文档
@@ -125,6 +129,11 @@ GitHub Actions 自动构建 ✓
 完整功能，多平台发布
 
 ## 更新日志
+
+### 2025-03-13 - v0.1.5
+- 修复 GitHub Actions Node.js 20 废弃警告
+- 添加 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` 环境变量
+- 自验证测试通过
 
 ### 2025-03-13 - v0.1.4
 - 代码质量优化，修复 flake8 E402 警告
