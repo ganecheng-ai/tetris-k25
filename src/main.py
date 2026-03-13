@@ -6,13 +6,13 @@ import os
 # 添加src到路径
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-import pygame
+import pygame  # noqa: E402
 
-from game import Game, GameState
-from renderer import Renderer
-from input_handler import InputHandler
-from logger import setup_logger
-from config import LOG_FILE
+from game import Game, GameState  # noqa: E402
+from renderer import Renderer  # noqa: E402
+from input_handler import InputHandler  # noqa: E402
+from logger import setup_logger  # noqa: E402
+from config import LOG_FILE  # noqa: E402
 
 
 def main():
